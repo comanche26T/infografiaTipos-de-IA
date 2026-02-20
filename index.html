@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Infografía: IA Tradicional vs Generativa vs Agentiva</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#121a33;
+      --muted:#9fb0ff;
+      --text:#eaf0ff;
+      --line:#2a3770;
+      --good:#7CFFB2;
+      --warn:#FFD27C;
+      --bad:#FF7C9C;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(900px 500px at 15% 10%, #1b2a6a 0%, transparent 60%),
+                  radial-gradient(900px 500px at 80% 20%, #2a124f 0%, transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.4;
+    }
+    header{
+      padding:32px 18px 12px;
+      max-width:1100px; margin:0 auto;
+    }
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:6px 10px; border:1px solid var(--line);
+      border-radius:999px; color:var(--muted); font-size:13px;
+      background: rgba(18,26,51,.55);
+    }
+    h1{margin:14px 0 6px; font-size:34px; letter-spacing:.2px}
+    p.lead{margin:0; color:#c7d2ff; max-width:860px}
+
+    main{max-width:1100px; margin:0 auto; padding:16px 18px 60px}
+    .grid{display:grid; gap:14px}
+    @media(min-width:900px){ .grid.cols3{grid-template-columns:repeat(3,1fr)} }
+    @media(min-width:900px){ .grid.cols2{grid-template-columns:1.2fr .8fr} }
+
+    .card{
+      background: linear-gradient(180deg, rgba(18,26,51,.88), rgba(18,26,51,.72));
+      border:1px solid rgba(42,55,112,.9);
+      border-radius:18px;
+      padding:16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.28);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-80px;
+      background: conic-gradient(from 220deg, rgba(124,255,178,.10), rgba(159,176,255,.08), rgba(255,124,156,.08), rgba(255,210,124,.08));
+      filter: blur(22px);
+      opacity:.55;
+      pointer-events:none;
+    }
+    .card > *{position:relative}
+    h2{font-size:18px; margin:0 0 10px}
+    .sub{color:#c7d2ff; font-size:13px; margin-top:-6px}
+    .pillRow{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 0}
+    .pill{
+      font-size:12px; color:#dbe4ff;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(42,55,112,.9);
+      background: rgba(10,15,35,.35);
+    }
+    .kpi{display:grid; gap:10px; margin-top:10px}
+    .kpi div{
+      border:1px dashed rgba(159,176,255,.35);
+      border-radius:14px; padding:10px;
+      background: rgba(10,15,35,.22);
+    }
+    .kpi b{display:block; font-size:13px}
+    .kpi span{color:#c7d2ff; font-size:12px}
+
+    .table{
+      width:100%; border-collapse:separate; border-spacing:0;
+      overflow:hidden; border-radius:14px;
+      border:1px solid rgba(42,55,112,.9);
+      margin-top:10px;
+    }
+    .table th,.table td{
+      padding:10px 10px; text-align:left;
+      border-bottom:1px solid rgba(42,55,112,.55);
+      vertical-align:top;
+      font-size:13px;
+    }
+    .table th{color:#c7d2ff; background: rgba(10,15,35,.35); font-weight:600}
+    .table tr:last-child td{border-bottom:0}
+    .tag{font-weight:700}
+    .tag.trad{color:var(--good)}
+    .tag.gen{color:var(--warn)}
+    .tag.ag{color:var(--muted)}
+
+    .simWrap{display:grid; gap:12px}
+    @media(min-width:900px){ .simWrap{grid-template-columns:repeat(3,1fr)} }
+    canvas{width:100%; height:180px; background: rgba(10,15,35,.35); border-radius:14px; border:1px solid rgba(42,55,112,.9)}
+    .controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    input[type="range"]{width:180px}
+    button{
+      border:1px solid rgba(42,55,112,.9);
+      background: rgba(10,15,35,.35);
+      color:var(--text);
+      padding:8px 10px; border-radius:12px;
+      cursor:pointer;
+    }
+    button:hover{filter:brightness(1.08)}
+    .small{font-size:12px; color:#c7d2ff}
+    footer{max-width:1100px;margin:0 auto;padding:0 18px 34px;color:#aebcff;font-size:12px}
+    a{color:#b9c6ff}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="badge">📌 Actividad: Tipos de IA • Infografía HTML + GitHub Pages</div>
+    <h1>IA Tradicional vs IA Generativa vs IA Agentiva</h1>
+    <p class="lead">
+      Comparación práctica con definiciones, modelos, casos de uso, métricas y simulaciones simples.
+      Objetivo: entender <b>qué resuelve cada enfoque</b> y <b>cómo se evalúa</b>.
+    </p>
+  </header>
+
+  <main>
+    <section class="grid cols3">
+      <article class="card">
+        <h2><span class="tag trad">IA Tradicional</span> (ML clásico)</h2>
+        <div class="sub">Predice / clasifica / agrupa a partir de datos (normalmente tabulares).</div>
+        <div class="kpi">
+          <div><b>Salida típica</b><span>Clase (sí/no), valor numérico (precio), clúster, componentes.</span></div>
+          <div><b>Modelos</b><span>Regresión, Árboles, Random Forest, SVM, KNN, Boosting, PCA, K-Means.</span></div>
+          <div><b>Métricas</b><span>Clasificación: F1/AUC • Regresión: RMSE/R² • Validación para evitar over/underfitting.</span></div>
+        </div>
+        <div class="pillRow">
+          <span class="pill">Diabetes (sí/no)</span>
+          <span class="pill">Predicción de precios</span>
+          <span class="pill">Fraude</span>
+          <span class="pill">Mantenimiento predictivo</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2><span class="tag gen">IA Generativa</span> (contenido nuevo)</h2>
+        <div class="sub">Genera texto/imagen/audio/código a partir de patrones aprendidos.</div>
+        <div class="kpi">
+          <div><b>Salida típica</b><span>Texto, imagen, código, embeddings, respuestas conversacionales.</span></div>
+          <div><b>Modelos</b><span>Transformers (LLM), Diffusion, GAN, VAE, modelos multimodales.</span></div>
+          <div><b>Métricas</b><span>Perplexity (texto), evaluaciones humanas, FID (imágenes), seguridad/groundedness.</span></div>
+        </div>
+        <div class="pillRow">
+          <span class="pill">Asistentes</span>
+          <span class="pill">Resúmenes</span>
+          <span class="pill">Generación de imágenes</span>
+          <span class="pill">Código</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2><span class="tag ag">IA Agentiva</span> (agéntica)</h2>
+        <div class="sub">Sistema con meta + modelo + herramientas + bucle de ejecución/verificación.</div>
+        <div class="kpi">
+          <div><b>Salida típica</b><span>Acciones, planes, decisiones, ejecución de tareas (multi-paso).</span></div>
+          <div><b>Enfoques</b><span>LLM + Tool-Use, ReAct, RAG, planners, multi-agentes; a veces RL.</span></div>
+          <div><b>Métricas</b><span>Éxito de tarea, tasa de error, costo/tiempo, confiabilidad, seguridad.</span></div>
+        </div>
+        <div class="pillRow">
+          <span class="pill">Automatizar reportes</span>
+          <span class="pill">Soporte técnico</span>
+          <span class="pill">Análisis de docs</span>
+          <span class="pill">Orquestación APIs</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h2>Comparación directa (diferencias clave)</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Aspecto</th>
+            <th>IA Tradicional</th>
+            <th>IA Generativa</th>
+            <th>IA Agentiva</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Objetivo</b></td>
+            <td>Predecir / clasificar / agrupar</td>
+            <td>Crear contenido nuevo</td>
+            <td>Resolver tareas multi-paso con acciones</td>
+          </tr>
+          <tr>
+            <td><b>Dato típico</b></td>
+            <td>Tablas, sensores, KPIs, historial</td>
+            <td>Texto, imágenes, audio, código</td>
+            <td>Docs + contexto + herramientas + estado</td>
+          </tr>
+          <tr>
+            <td><b>Evaluación</b></td>
+            <td>Métricas clásicas (F1, RMSE, R²)</td>
+            <td>Calidad + seguridad + consistencia</td>
+            <td>Task success + costo + confiabilidad</td>
+          </tr>
+          <tr>
+            <td><b>Riesgo típico</b></td>
+            <td>Overfitting/underfitting</td>
+            <td>Alucinación / sesgo</td>
+            <td>Acciones erróneas / loops / seguridad</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="small" style="margin-top:10px">
+        Nota: Agentiva suele usar Generativa “por dentro”, pero agrega <b>planificación</b>, <b>herramientas</b> y <b>verificación</b>.
+      </p>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h2>Simulaciones rápidas (para que sea infografía “con demo”)</h2>
+      <div class="simWrap">
+        <!-- Sim 1: Over/underfitting -->
+        <div>
+          <h3 style="margin:0 0 8px;font-size:14px">1) Tradicional: Underfitting vs Overfitting</h3>
+          <canvas id="cvFit" width="520" height="280"></canvas>
+          <div class="controls">
+            <label class="small">Complejidad</label>
+            <input id="rngFit" type="range" min="1" max="12" value="3" />
+            <span id="lblFit" class="small"></span>
+            <button id="btnNew">Nuevo dataset</button>
+          </div>
+          <div class="small">Baja complejidad → underfitting • Muy alta → overfitting.</div>
+        </div>
+
+        <!-- Sim 2: Generative toy -->
+        <div>
+          <h3 style="margin:0 0 8px;font-size:14px">2) Generativa: Mini generador de texto (toy)</h3>
+          <div class="card" style="padding:12px;border-radius:14px">
+            <div class="small">Prompt</div>
+            <input id="txtPrompt" value="Idea:" style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(42,55,112,.9);background:rgba(10,15,35,.35);color:var(--text)" />
+            <div style="height:8px"></div>
+            <button id="btnGen">Generar</button>
+            <div style="height:10px"></div>
+            <div class="small">Salida</div>
+            <div id="outGen" style="margin-top:6px;padding:10px;border-radius:12px;border:1px solid rgba(42,55,112,.9);background:rgba(10,15,35,.25);min-height:76px"></div>
+            <div class="small" style="margin-top:8px">Demostración simple (no es un LLM real): sirve para explicar “generar” vs “predecir clase”.</div>
+          </div>
+        </div>
+
+        <!-- Sim 3: Agent loop -->
+        <div>
+          <h3 style="margin:0 0 8px;font-size:14px">3) Agentiva: Bucle “Plan → Actúa → Verifica”</h3>
+          <div class="card" style="padding:12px;border-radius:14px">
+            <div class="small">Tarea</div>
+            <select id="selTask" style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(42,55,112,.9);background:rgba(10,15,35,.35);color:var(--text)">
+              <option value="soporte">Resolver ticket de soporte (diagnóstico rápido)</option>
+              <option value="marketing">Segmentar clientes y proponer campaña</option>
+              <option value="docs">Resumir documento y extraer acciones</option>
+            </select>
+            <div style="height:8px"></div>
+            <button id="btnAgent">Ejecutar agente</button>
+            <div style="height:10px"></div>
+            <div class="small">Log</div>
+            <div id="logAgent" style="margin-top:6px;padding:10px;border-radius:12px;border:1px solid rgba(42,55,112,.9);background:rgba(10,15,35,.25);min-height:110px;white-space:pre-wrap"></div>
+            <div class="small" style="margin-top:8px">La idea: un agente no solo “responde”, <b>toma pasos</b> y <b>verifica</b>.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h2>Modelos y casos de uso (listo para copiar en tu exposición)</h2>
+      <div class="grid cols2">
+        <div>
+          <h3 style="margin:0 0 8px;font-size:14px">Modelos representativos</h3>
+          <ul style="margin:0;padding-left:18px;color:#dbe4ff">
+            <li><b>Tradicional:</b> Regresión, Árboles, Random Forest, SVM, KNN, Boosting, PCA, K-Means.</li>
+            <li><b>Generativa:</b> Transformers (LLM), Diffusion, GAN, VAE, multimodales.</li>
+            <li><b>Agentiva:</b> Tool-use + planner, ReAct, RAG, multi-agentes; (opcional) RL para políticas.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin:0 0 8px;font-size:14px">Ejemplos rápidos</h3>
+          <ul style="margin:0;padding-left:18px;color:#dbe4ff">
+            <li><b>Tradicional:</b> diabetes sí/no, predicción de precios, fraude, mantenimiento predictivo.</li>
+            <li><b>Generativa:</b> redactar, resumir, generar imágenes, generar código, asistentes.</li>
+            <li><b>Agentiva:</b> automatizar tickets, análisis de documentos con acciones, flujos con APIs y verificación.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Publicación en GitHub Pages: 1) crea repo 2) sube este index.html 3) Settings → Pages → Deploy from branch (main / root) 4) copia tu URL y envíala como URI.
+  </footer>
+
+<script>
+  // ---------- Sim 1: Fit (toy) ----------
+  const cvFit = document.getElementById("cvFit");
+  const ctx = cvFit.getContext("2d");
+  const rngFit = document.getElementById("rngFit");
+  const lblFit = document.getElementById("lblFit");
+  const btnNew = document.getElementById("btnNew");
+
+  let pts = [];
+  function randn(){ // Box-Muller
+    let u=0,v=0; while(u===0)u=Math.random(); while(v===0)v=Math.random();
+    return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);
+  }
+  function makeData(){
+    pts = [];
+    for(let i=0;i<28;i++){
+      const x = -1 + 2*Math.random();
+      const yTrue = 0.25 + 0.9*x + 0.8*x*x - 0.6*x*x*x;
+      const y = yTrue + 0.18*randn();
+      pts.push({x,y});
+    }
+  }
+  function polyFit(deg){
+    // Ridge-like quick fit via normal equations (toy; not numerical perfection, but works for demo)
+    // Build X and y
+    const n = pts.length;
+    const X = [];
+    const Y = [];
+    for(const p of pts){
+      const row = [];
+      for(let d=0; d<=deg; d++) row.push(Math.pow(p.x,d));
+      X.push(row); Y.push(p.y);
+    }
+    // Compute A = X^T X + lambda I, b = X^T y
+    const m = deg+1;
+    const lambda = 0.001;
+    const A = Array.from({length:m},()=>Array(m).fill(0));
+    const b = Array(m).fill(0);
+    for(let i=0;i<n;i++){
+      for(let r=0;r<m;r++){
+        b[r] += X[i][r]*Y[i];
+        for(let c=0;c<m;c++){
+          A[r][c] += X[i][r]*X[i][c];
+        }
+      }
+    }
+    for(let i=0;i<m;i++) A[i][i]+=lambda;
+
+    // Solve A w = b (Gaussian elimination)
+    const M = A.map((row,i)=>row.concat([b[i]]));
+    for(let i=0;i<m;i++){
+      // pivot
+      let p=i;
+      for(let r=i+1;r<m;r++) if(Math.abs(M[r][i])>Math.abs(M[p][i])) p=r;
+      [M[i],M[p]]=[M[p],M[i]];
+      const div = M[i][i] || 1e-9;
+      for(let c=i;c<m+1;c++) M[i][c]/=div;
+      for(let r=0;r<m;r++){
+        if(r===i) continue;
+        const factor = M[r][i];
+        for(let c=i;c<m+1;c++) M[r][c]-=factor*M[i][c];
+      }
+    }
+    const w = M.map(row=>row[m]);
+    return (x)=>{
+      let s=0;
+      for(let d=0; d<=deg; d++) s += w[d]*Math.pow(x,d);
+      return s;
+    }
+  }
+  function drawFit(){
+    const deg = Number(rngFit.value);
+    lblFit.textContent = `Grado: ${deg}`;
+    ctx.clearRect(0,0,cvFit.width,cvFit.height);
+
+    // axes
+    const pad=28;
+    const W=cvFit.width, H=cvFit.height;
+    function sx(x){ return pad + (x+1)/2*(W-2*pad); }
+    function sy(y){ return H-pad - (y+0.8)/2.2*(H-2*pad); } // map roughly
+    ctx.globalAlpha=1;
+    ctx.strokeStyle="rgba(159,176,255,.35)";
+    ctx.lineWidth=1;
+    ctx.beginPath();
+    ctx.moveTo(pad,H-pad); ctx.lineTo(W-pad,H-pad);
+    ctx.moveTo(pad,H-pad); ctx.lineTo(pad,pad);
+    ctx.stroke();
+
+    // points
+    for(const p of pts){
+      ctx.fillStyle="rgba(234,240,255,.9)";
+      ctx.beginPath();
+      ctx.arc(sx(p.x), sy(p.y), 3.3, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    // fit curve
+    const f = polyFit(deg);
+    ctx.strokeStyle="rgba(124,255,178,.95)";
+    ctx.lineWidth=2.2;
+    ctx.beginPath();
+    for(let i=0;i<=260;i++){
+      const x = -1 + 2*i/260;
+      const y = f(x);
+      if(i===0) ctx.moveTo(sx(x), sy(y));
+      else ctx.lineTo(sx(x), sy(y));
+    }
+    ctx.stroke();
+
+    // label
+    const note = deg<=2 ? "Tendencia: underfitting" : (deg>=9 ? "Tendencia: overfitting" : "Buen equilibrio (generaliza mejor)");
+    ctx.fillStyle="rgba(255,210,124,.95)";
+    ctx.font="13px system-ui";
+    ctx.fillText(note, pad, 18);
+  }
+
+  rngFit.addEventListener("input", drawFit);
+  btnNew.addEventListener("click", ()=>{ makeData(); drawFit(); });
+
+  // ---------- Sim 2: Toy generator ----------
+  const btnGen = document.getElementById("btnGen");
+  const txtPrompt = document.getElementById("txtPrompt");
+  const outGen = document.getElementById("outGen");
+
+  const ideas = [
+    "un sistema que predice demanda y recomienda stock mínimo por semana.",
+    "una app que segmenta clientes y genera mensajes personalizados por perfil.",
+    "un detector de anomalías para alertar fallas tempranas en equipos.",
+    "un asistente que resume documentos y extrae tareas accionables.",
+    "un generador de descripciones de producto con tono de marca."
+  ];
+  const conectores = ["Además,", "Luego,", "Por eso,", "En consecuencia,", "Como resultado,"];
+  btnGen.addEventListener("click", ()=>{
+    const p = (txtPrompt.value || "Idea:").trim();
+    const a = ideas[Math.floor(Math.random()*ideas.length)];
+    const c = conectores[Math.floor(Math.random()*conectores.length)];
+    outGen.textContent = `${p} ${a} ${c} se valida con métricas y se ajusta para evitar overfitting.`;
+  });
+
+  // ---------- Sim 3: Agent loop ----------
+  const btnAgent = document.getElementById("btnAgent");
+  const selTask = document.getElementById("selTask");
+  const logAgent = document.getElementById("logAgent");
+
+  function runAgent(task){
+    const steps = [];
+    steps.push("PLAN: definir objetivo y restricciones.");
+    if(task==="soporte"){
+      steps.push("ACT: pedir síntomas / logs mínimos.");
+      steps.push("ACT: proponer 2-3 hipótesis y pruebas rápidas.");
+      steps.push("VERIFY: si prueba falla, iterar y registrar hallazgos.");
+      steps.push("DONE: solución o escalamiento con evidencia.");
+    }else if(task==="marketing"){
+      steps.push("ACT: obtener variables (RFM, ticket, frecuencia).");
+      steps.push("ACT: clustering para perfiles + propuesta de campaña.");
+      steps.push("VERIFY: medir conversión / uplift, ajustar segmentos.");
+      steps.push("DONE: campaña final con KPI objetivo.");
+    }else{
+      steps.push("ACT: buscar secciones clave del documento (RAG).");
+      steps.push("ACT: resumir + extraer acciones y responsables.");
+      steps.push("VERIFY: contrastar contra el texto original (citas).");
+      steps.push("DONE: checklist accionable.");
+    }
+    return steps.join("\\n");
+  }
+
+  btnAgent.addEventListener("click", ()=>{
+    logAgent.textContent = runAgent(selTask.value);
+  });
+
+  // init
+  makeData();
+  drawFit();
+  outGen.textContent = "Escribe un prompt y presiona Generar.";
+  logAgent.textContent = "Selecciona una tarea y presiona Ejecutar agente.";
+</script>
+</body>
+</html>
